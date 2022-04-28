@@ -1,6 +1,8 @@
 # go-cache
 
-go-cache is an in-memory key:value store/cache similar to memcached that is
+ℹ️ go-cache is generic port of [go-cache](https://github.com/patrickmn/go-cache) library.
+
+go-cache is an generic in-memory key:value store/cache similar to memcached that is
 suitable for applications running on a single machine. Its major advantage is
 that, being essentially a thread-safe `map[string]interface{}` with expiration
 times, it doesn't need to serialize or transmit its contents over the network.
@@ -15,29 +17,29 @@ one) to recover from downtime quickly. (See the docs for `NewFrom()` for caveats
 
 ### Installation
 
-`go get github.com/patrickmn/go-cache`
+`go get github.com/DenisPalnitsky/go-cache`
 
 ### Usage
 
 ```go
 import (
 	"fmt"
-	"github.com/patrickmn/go-cache"
+	"github.com/DenisPalnitsky/go-cache"
 	"time"
 )
 
 func main() {
 	// Create a cache with a default expiration time of 5 minutes, and which
 	// purges expired items every 10 minutes
-	c := cache.New(5*time.Minute, 10*time.Minute)
+	c := cache.New[string](5*time.Minute, 10*time.Minute)
 
 	// Set the value of the key "foo" to "bar", with the default expiration time
 	c.Set("foo", "bar", cache.DefaultExpiration)
 
-	// Set the value of the key "baz" to 42, with no expiration time
+	// Set the value of the key "baz" to "lightning", with no expiration time
 	// (the item won't be removed until it is re-set, or removed using
 	// c.Delete("baz")
-	c.Set("baz", 42, cache.NoExpiration)
+	c.Set("baz", "lightning", cache.NoExpiration)
 
 	// Get the string associated with the key "foo" from the cache
 	foo, found := c.Get("foo")
@@ -45,39 +47,17 @@ func main() {
 		fmt.Println(foo)
 	}
 
-	// Since Go is statically typed, and cache values can be anything, type
-	// assertion is needed when values are being passed to functions that don't
-	// take arbitrary types, (i.e. interface{}). The simplest way to do this for
-	// values which will only be used once--e.g. for passing to another
-	// function--is:
-	foo, found := c.Get("foo")
-	if found {
-		MyFunction(foo.(string))
-	}
-
-	// This gets tedious if the value is used several times in the same function.
-	// You might do either of the following instead:
-	if x, found := c.Get("foo"); found {
-		foo := x.(string)
-		// ...
-	}
-	// or
-	var foo string
-	if x, found := c.Get("foo"); found {
-		foo = x.(string)
-	}
-	// ...
-	// foo can then be passed around freely as a string
-
 	// Want performance? Store pointers!
-	c.Set("foo", &MyStruct, cache.DefaultExpiration)
+	structCache := cache.New[MyStruct](5*time.Minute, 10*time.Minute)
+	structCache.Set("foo", &MyStruct, cache.DefaultExpiration)
 	if x, found := c.Get("foo"); found {
-		foo := x.(*MyStruct)
-			// ...
+		fmt.Println(")
 	}
 }
 ```
 
+Run this example with `go run examples/main.go`.
+
 ### Reference
 
-`godoc` or [http://godoc.org/github.com/patrickmn/go-cache](http://godoc.org/github.com/patrickmn/go-cache)
+`godoc` or [http://godoc.org/github.com/DenisPalnitsky/go-cache](http://godoc.org/github.com/DenisPalnitsky/go-cache)

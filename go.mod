@@ -1,4 +1,4 @@
-module go-cache
+module github.com/DenisPalnitsky/go-cache
 
 go 1.18
 
