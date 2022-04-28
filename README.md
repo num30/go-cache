@@ -1,6 +1,10 @@
 # go-cache
 
-ℹ️ go-cache is generic port of [go-cache](https://github.com/patrickmn/go-cache) library.
+[![test-and-lint](https://github.com/DenisPalnitsky/go-cache/actions/workflows/test.yaml/badge.svg)](https://github.com/DenisPalnitsky/go-cache/actions/workflows/test.yaml)
+[![codecov](https://codecov.io/gh/DenisPalnitsky/go-cache/branch/main/graph/badge.svg?token=FMvJ4TbC2r)](https://codecov.io/gh/DenisPalnitsky/go-cache)
+[![Go Report Card](https://goreportcard.com/badge/github.com/denispalnitsky/go-cache)](https://goreportcard.com/report/github.com/denispalnitsky/go-cache)
+
+ℹ️ go-cache is generic port of great [go-cache](https://github.com/patrickmn/go-cache) library that was written by @patrickmn
 
 go-cache is an generic in-memory key:value store/cache similar to memcached that is
 suitable for applications running on a single machine. Its major advantage is
