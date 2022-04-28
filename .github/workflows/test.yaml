@@ -6,9 +6,8 @@ on:
   push:
 
 jobs:
-  build:
-
-    name: build and test
+  test:
+    name: test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -17,9 +16,6 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: 1.18
-
-    - name: lint
-      uses: golangci/golangci-lint-action@v2
 
     - name: Test
       run:  go test -v ./... -coverprofile="coverage.out"
@@ -32,3 +28,13 @@ jobs:
         fail_ci_if_error: true # optional (default = false)
         verbose: false # optional (default = false)
 
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+  	steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 1
+		- uses: dominikh/staticcheck-action@v1.1.0
+		  with:
+			version: "2022.1.1"

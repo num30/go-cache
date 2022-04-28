@@ -4,4 +4,4 @@ test:
 
 # Go lint
 lint:
-	golangci-lint run
+	staticcheck ./...
