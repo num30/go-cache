@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/DenisPalnitsky/go-cache"
 	"time"
+
+	"github.com/num30/go-cache"
 )
 
 func main() {

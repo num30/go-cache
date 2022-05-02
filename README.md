@@ -1,8 +1,8 @@
 # go-cache
 
-[![test-and-lint](https://github.com/DenisPalnitsky/go-cache/actions/workflows/test.yaml/badge.svg)](https://github.com/DenisPalnitsky/go-cache/actions/workflows/test.yaml)
-[![codecov](https://codecov.io/gh/DenisPalnitsky/go-cache/branch/main/graph/badge.svg?token=FMvJ4TbC2r)](https://codecov.io/gh/DenisPalnitsky/go-cache)
-[![Go Report Card](https://goreportcard.com/badge/github.com/denispalnitsky/go-cache)](https://goreportcard.com/report/github.com/denispalnitsky/go-cache)
+[![test-and-lint](https://github.com/num30/go-cache/actions/workflows/test.yaml/badge.svg)](https://github.com/num30/go-cache/actions/workflows/test.yaml)
+[![codecov](https://codecov.io/gh/num30/go-cache/branch/main/graph/badge.svg?token=FMvJ4TbC2r)](https://codecov.io/gh/num30/go-cache)
+[![Go Report Card](https://goreportcard.com/badge/github.com/num30/go-cache)](https://goreportcard.com/report/github.com/num30/go-cache)
 
 ℹ️ go-cache is generic port of great [go-cache](https://github.com/patrickmn/go-cache) library that was written by @patrickmn
 
@@ -21,14 +21,14 @@ one) to recover from downtime quickly. (See the docs for `NewFrom()` for caveats
 
 ### Installation
 
-`go get github.com/DenisPalnitsky/go-cache`
+`go get github.com/num30/go-cache`
 
 ### Usage
 
 ```go
 import (
 	"fmt"
-	"github.com/DenisPalnitsky/go-cache"
+	"github.com/num30/go-cache"
 	"time"
 )
 
@@ -64,4 +64,4 @@ Run this example with `go run examples/main.go`.
 
 ### Reference
 
-`godoc` or [http://godoc.org/github.com/DenisPalnitsky/go-cache](http://godoc.org/github.com/DenisPalnitsky/go-cache)
+`godoc` or [http://godoc.org/github.com/num30/go-cache](http://godoc.org/github.com/num30/go-cache)
