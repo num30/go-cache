@@ -4,11 +4,11 @@
 [![codecov](https://codecov.io/gh/num30/go-cache/branch/main/graph/badge.svg?token=FMvJ4TbC2r)](https://codecov.io/gh/num30/go-cache)
 [![Go Report Card](https://goreportcard.com/badge/github.com/num30/go-cache)](https://goreportcard.com/report/github.com/num30/go-cache)
 
-ℹ️ go-cache is generic port of great [go-cache](https://github.com/patrickmn/go-cache) library that was written by @patrickmn
+ℹ️ go-cache is a port of great [go-cache](https://github.com/patrickmn/go-cache) library that was written by @patrickmn. The main defference is that it relies on generics instead of reflection.
 
-go-cache is an generic in-memory key:value store/cache similar to memcached that is
+go-cache is a  in-memory key:value store/cache similar to memcached that is
 suitable for applications running on a single machine. Its major advantage is
-that, being essentially a thread-safe `map[string]interface{}` with expiration
+that, being essentially a thread-safe `map[string][T]` with expiration
 times, it doesn't need to serialize or transmit its contents over the network.
 
 Any object can be stored, for a given duration or forever, and the cache can be
