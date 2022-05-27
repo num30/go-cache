@@ -3,6 +3,7 @@
 [![test-and-lint](https://github.com/num30/go-cache/actions/workflows/test.yaml/badge.svg)](https://github.com/num30/go-cache/actions/workflows/test.yaml)
 [![codecov](https://codecov.io/gh/num30/go-cache/branch/main/graph/badge.svg?token=FMvJ4TbC2r)](https://codecov.io/gh/num30/go-cache)
 [![Go Report Card](https://goreportcard.com/badge/github.com/num30/go-cache)](https://goreportcard.com/report/github.com/num30/go-cache)
+[![Go Reference](https://pkg.go.dev/badge/github.com/num30/go-cache.svg)](https://pkg.go.dev/github.com/num30/go-cache)
 
 ℹ️ go-cache is a port of great [go-cache](https://github.com/patrickmn/go-cache) library that was written by @patrickmn. The main defference is that it relies on generics instead of reflection.
 
@@ -62,6 +63,29 @@ func main() {
 
 Run this example with `go run examples/main.go`.
 
-### Reference
+## Performance Comparison
+Comparison of performance with original [go-cache](https://github.com/patrickmn/go-cache) implementation.
 
-`godoc` or [http://godoc.org/github.com/num30/go-cache](http://godoc.org/github.com/num30/go-cache)
+Spoiler alert! The difference is insignificant.
+
+
+
+| Test                                         |     [Non generic](https://github.com/patrickmn/go-cache)|       |         This version |           |  
+|----------------------------------------------|-----------|-------------|-----------|---------------|
+| BenchmarkCacheGetStringExpiring-8            | 29884011 | 41.45 ns/op | 28318041 | 43.31 ns/op |
+| BenchmarkCacheGetStringNotExpiring-8         | 91891774 | 14.20 ns/op | 72259294 | 14.02 ns/op |
+| BenchmarkCacheGetConcurrentExpiring-8        | 26299849 | 42.58 ns/op | 30129078 | 39.53 ns/op |
+| BenchmarkCacheGetConcurrentNotExpiring-8     | 28991383 | 41.25 ns/op | 30760544 | 38.09 ns/op |
+| BenchmarkCacheGetManyConcurrentExpiring-8    | 55589712 | 44.90 ns/op | 56991110 | 38.86 ns/op |
+| BenchmarkCacheGetManyConcurrentNotExpiring-8 | 30105078 | 43.98 ns/op | 46270045 | 41.54 ns/op |
+| BenchmarkCacheSetStringExpiring-8            | 18392893 | 63.41 ns/op | 17788724 | 61.42 ns/op |
+| BenchmarkCacheSetStringNotExpiring-8         | 46400654 | 28.45 ns/op | 40226074 | 27.41 ns/op |
+| BenchmarkCacheSetDelete-8                    | 18703620 | 60.75 ns/op | 18270448 | 59.90 ns/op |
+| BenchmarkCacheSetDeleteSingleLock-8          | 32633755 | 39.34 ns/op | 32415156 | 36.96 ns/op |
+| BenchmarkCacheGetStructExpiring-8            | 30487856 | 41.60 ns/op | 26925226 | 40.55 ns/op |
+| BenchmarkCacheGetStructNotExpiring-8         | 91921044 | 13.94 ns/op | 96379750 | 13.08 ns/op |
+| BenchmarkCacheSetStructExpiring-8            | 13977464 | 86.44 ns/op | 13364509 | 87.69 ns/op |
+| BenchmarkCacheSetStructNotExpiring-8         | 22749384 | 54.14 ns/op | 23207397 | 52.58 ns/op |
+| BenchmarkCacheSetFatStructExpiring-8         | 11718718 | 103.3 ns/op | 12051895 | 102.3 ns/op |
+| BenchmarkCacheGetFatStructNotExpiring-8      | 88695709 | 13.92 ns/op | 83220014 | 13.76 ns/op |
+
