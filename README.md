@@ -70,7 +70,7 @@ Spoiler alert! The difference is insignificant.
 
 
 
-| Test                                         |     [Non generic](https://github.com/patrickmn/go-cache)|       |         This version |           |  
+| <sub>Test </sub>                                        |    <sub> [Non generic](https://github.com/patrickmn/go-cache)</sub> |       |         <sub>This version</sub> |           |  
 |----------------------------------------------|-----------|-------------|-----------|---------------|
 | <sub>BenchmarkCacheGetStringExpiring-8            </sub>|  <sub>29884011</sub> | <sub>41.45 ns/op</sub> | <sub>28318041</sub> | <sub>43.31 ns/op</sub> |
 | <sub>BenchmarkCacheGetStringNotExpiring-8         </sub>|  <sub>91891774</sub> | <sub>14.20 ns/op</sub> | <sub>72259294</sub> | <sub>14.02 ns/op</sub> |
