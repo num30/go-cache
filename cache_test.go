@@ -679,3 +679,27 @@ func benchmarkCacheSetStruct(b *testing.B, exp time.Duration) {
 		tc.Set("foo", &TestStruct{Num: 1}, DefaultExpiration)
 	}
 }
+
+func BenchmarkCacheSetFatStructExpiring(b *testing.B) {
+	b.StopTimer()
+	tc := New[*TestStruct](NoExpiration, 0)
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		tc.Set("foo", &TestStruct{Num: 1, Children: []*TestStruct{
+			&TestStruct{Num: 2, Children: []*TestStruct{}}}}, DefaultExpiration)
+	}
+}
+
+func BenchmarkCacheGetFatStructNotExpiring(b *testing.B) {
+	b.StopTimer()
+	tc := New[*TestStruct](NoExpiration, 0)
+
+	tc.Set("foo", &TestStruct{Num: 1, Children: []*TestStruct{
+		&TestStruct{Num: 2, Children: []*TestStruct{}}}}, DefaultExpiration)
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		st, _ := tc.Get("foo")
+		// just do something
+		st.Num++
+	}
+}

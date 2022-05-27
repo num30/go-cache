@@ -85,6 +85,11 @@ Spoiler alert! The difference is insignificant.
 | BenchmarkCacheGetStructNotExpiring-8         | 91921044 | 13.94 ns/op | 96379750 | 13.08 ns/op |
 | BenchmarkCacheSetStructExpiring-8            | 13977464 | 86.44 ns/op | 13364509 | 87.69 ns/op |
 | BenchmarkCacheSetStructNotExpiring-8         | 22749384 | 54.14 ns/op | 23207397 | 52.58 ns/op |
+|BenchmarkCacheSetFatStructExpiring-8          | 11718718 | 103.3 ns/op | 12051895 | 102.3 ns/op |
+|BenchmarkCacheGetFatStructNotExpiring-8       | 88695709 | 13.92 ns/op | 83220014 | 13.76 ns/op |
+
+
+
 
 ### Reference
 
