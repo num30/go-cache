@@ -2,13 +2,14 @@ package cache
 
 import (
 	"bytes"
-	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"runtime"
 	"strconv"
 	"sync"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
 type TestStruct struct {
@@ -346,15 +347,15 @@ func TestSerializeUnserializable(t *testing.T) {
 	}
 }
 
-func BenchmarkCacheGetExpiring(b *testing.B) {
-	benchmarkCacheGet(b, 5*time.Minute)
+func BenchmarkCacheGetStringExpiring(b *testing.B) {
+	benchmarkCacheGetString(b, 5*time.Minute)
 }
 
-func BenchmarkCacheGetNotExpiring(b *testing.B) {
-	benchmarkCacheGet(b, NoExpiration)
+func BenchmarkCacheGetStringNotExpiring(b *testing.B) {
+	benchmarkCacheGetString(b, NoExpiration)
 }
 
-func benchmarkCacheGet(b *testing.B, exp time.Duration) {
+func benchmarkCacheGetString(b *testing.B, exp time.Duration) {
 	b.StopTimer()
 	tc := New[string](exp, 0)
 	tc.Set("foo", "bar", DefaultExpiration)
@@ -495,15 +496,15 @@ func benchmarkCacheGetManyConcurrent(b *testing.B, exp time.Duration) {
 	wg.Wait()
 }
 
-func BenchmarkCacheSetExpiring(b *testing.B) {
-	benchmarkCacheSet(b, 5*time.Minute)
+func BenchmarkCacheSetStringExpiring(b *testing.B) {
+	benchmarkCacheSetString(b, 5*time.Minute)
 }
 
-func BenchmarkCacheSetNotExpiring(b *testing.B) {
-	benchmarkCacheSet(b, NoExpiration)
+func BenchmarkCacheSetStringNotExpiring(b *testing.B) {
+	benchmarkCacheSetString(b, NoExpiration)
 }
 
-func benchmarkCacheSet(b *testing.B, exp time.Duration) {
+func benchmarkCacheSetString(b *testing.B, exp time.Duration) {
 	b.StopTimer()
 	tc := New[string](exp, 0)
 	b.StartTimer()
@@ -637,4 +638,44 @@ func TestGetWithExpiration(t *testing.T) {
 	assert.Equal(t, 5, x)
 	assert.Equal(t, expiration.UnixNano(), tc.items["e"].Expiration, "expiration for e is not the correct time")
 	assert.Greater(t, expiration.UnixNano(), time.Now().UnixNano(), "expiration for e is in the past")
+}
+
+// Benchmark struct
+
+func BenchmarkCacheGetStructExpiring(b *testing.B) {
+	benchmarkCacheGetStruct(b, 5*time.Minute)
+}
+
+func BenchmarkCacheGetStructNotExpiring(b *testing.B) {
+	benchmarkCacheGetStruct(b, NoExpiration)
+}
+
+func benchmarkCacheGetStruct(b *testing.B, exp time.Duration) {
+	b.StopTimer()
+	tc := New[*TestStruct](exp, 0)
+
+	tc.Set("foo", &TestStruct{Num: 1}, DefaultExpiration)
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		st, _ := tc.Get("foo")
+		// just do something
+		st.Num++
+	}
+}
+
+func BenchmarkCacheSetStructExpiring(b *testing.B) {
+	benchmarkCacheSetStruct(b, 5*time.Minute)
+}
+
+func BenchmarkCacheSetStructNotExpiring(b *testing.B) {
+	benchmarkCacheSetStruct(b, NoExpiration)
+}
+
+func benchmarkCacheSetStruct(b *testing.B, exp time.Duration) {
+	b.StopTimer()
+	tc := New[*TestStruct](exp, 0)
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		tc.Set("foo", &TestStruct{Num: 1}, DefaultExpiration)
+	}
 }
