@@ -3,6 +3,7 @@
 [![test-and-lint](https://github.com/num30/go-cache/actions/workflows/test.yaml/badge.svg)](https://github.com/num30/go-cache/actions/workflows/test.yaml)
 [![codecov](https://codecov.io/gh/num30/go-cache/branch/main/graph/badge.svg?token=FMvJ4TbC2r)](https://codecov.io/gh/num30/go-cache)
 [![Go Report Card](https://goreportcard.com/badge/github.com/num30/go-cache)](https://goreportcard.com/report/github.com/num30/go-cache)
+[![Go Reference](https://pkg.go.dev/badge/github.com/num30/go-cache.svg)](https://pkg.go.dev/github.com/num30/go-cache)
 
 ℹ️ go-cache is generic port of great [go-cache](https://github.com/patrickmn/go-cache) library that was written by @patrickmn
 
@@ -85,12 +86,6 @@ Spoiler alert! The difference is insignificant.
 | BenchmarkCacheGetStructNotExpiring-8         | 91921044 | 13.94 ns/op | 96379750 | 13.08 ns/op |
 | BenchmarkCacheSetStructExpiring-8            | 13977464 | 86.44 ns/op | 13364509 | 87.69 ns/op |
 | BenchmarkCacheSetStructNotExpiring-8         | 22749384 | 54.14 ns/op | 23207397 | 52.58 ns/op |
-|BenchmarkCacheSetFatStructExpiring-8          | 11718718 | 103.3 ns/op | 12051895 | 102.3 ns/op |
-|BenchmarkCacheGetFatStructNotExpiring-8       | 88695709 | 13.92 ns/op | 83220014 | 13.76 ns/op |
+| BenchmarkCacheSetFatStructExpiring-8         | 11718718 | 103.3 ns/op | 12051895 | 102.3 ns/op |
+| BenchmarkCacheGetFatStructNotExpiring-8      | 88695709 | 13.92 ns/op | 83220014 | 13.76 ns/op |
 
-
-
-
-### Reference
-
-`godoc` or [http://godoc.org/github.com/num30/go-cache](http://godoc.org/github.com/num30/go-cache)
